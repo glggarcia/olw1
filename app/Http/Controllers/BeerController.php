@@ -21,8 +21,8 @@ class BeerController extends Controller
         $filename = 'cervejas-encontradas-' . now()->format('Y-m-d - H_i') . '.xlsx';
 
         ExportJob::withChain([
-            new SendExportMailJob($filename),
-            new StoreExportDataJob(Auth::user(), $filename)
+            (new SendExportMailJob($filename))->delay(5),
+            (new StoreExportDataJob(Auth::user(), $filename))->delay(10)
         ])->dispatch($request->validated(), $filename);
 
         return "Relatório ${filename} criado";

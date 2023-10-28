@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeerController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,10 @@ Route::group([
 ], function () {
     Route::get('/', [BeerController::class, 'index']);
     Route::get('/export', [BeerController::class, 'export']);
+    Route::resource('/reports', ExportController::class)
+        ->only(['index', 'destroy']);
 });
+
+
 
 
