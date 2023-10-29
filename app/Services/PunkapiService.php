@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class PunkapiService
@@ -27,9 +28,17 @@ class PunkapiService
             'ibu_gt' => $ibuGt
         ];
 
-        return Http::punkapi()
+        if (Cache::has($beerName)) {
+            return Cache::get($beerName);
+        }
+
+        $beers =  Http::punkapi()
             ->get('/beers', $queryParams)
             ->throw()
             ->json();
+
+        Cache::put($beerName, $beers, now()->addMinutes(10));
+
+        return $beers;
     }
 }
