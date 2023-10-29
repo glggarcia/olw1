@@ -6,6 +6,7 @@ import Select from '@/Components/Select.vue';
 import Table from '@/Components/Table.vue';
 import THead from '@/Components/THead.vue';
 import TData from '@/Components/TData.vue';
+import Dialog from "@/Components/Dialog.vue";
 
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import {useForm} from "@inertiajs/vue3";
@@ -104,7 +105,7 @@ const downloadFile = () => {
                 </Table>
             </div>
 
-<!--            <Dialog :open="flash.success" title="Sucesso!" :description="flash.message" button="Ok!" />-->
+            <Dialog :open="flash.success" title="Sucesso!" :description="flash.message" button="Ok!" />
         </div>
     </AuthenticatedLayout>
 </template>

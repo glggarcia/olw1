@@ -18,7 +18,7 @@ class BeerController extends Controller
         $filters = $request->validated();
         $beers = $service->getBeers(... $filters);
         $meals = Meal::all();
-        
+
         return Inertia::render('Beers', [
             'beers' => $beers,
             'meals' => $meals,
@@ -35,6 +35,7 @@ class BeerController extends Controller
             (new StoreExportDataJob(Auth::user(), $filename))->delay(10)
         ])->dispatch($request->validated(), $filename);
 
-        return "Relatório ${filename} criado";
+        return redirect()->back()
+            ->with('success', 'Seu arquivo foi enviado para processamento e em breve estará em seu e-mail');
     }
 }

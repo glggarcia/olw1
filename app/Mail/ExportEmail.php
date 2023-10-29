@@ -52,7 +52,7 @@ class ExportEmail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromStorageDisk('s3', $this->filename)
+            Attachment::fromStorage($this->filename)
                 ->withMime('application/xlsx')
         ];
     }
